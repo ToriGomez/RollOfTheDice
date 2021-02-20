@@ -11,12 +11,10 @@ Module RollOfTheDice
         Dim rollsResult As Integer
         Dim diceValue As Integer = 1
         Dim numbers(12) As Integer
-
         'Generates the sum of two dice rolled values. Min of 2, Max of 12.
         'Accumulates the amount of times each value is rolled from 1000 rolls.
         For i = 1 To 1000
             rollsResult = RandomNumber()
-
             Select Case rollsResult
                 Case 2
                     numbers(2) += diceValue
@@ -44,49 +42,23 @@ Module RollOfTheDice
                     MsgBox($"Error!: {rollsResult}")
             End Select
         Next
-
         'Rows Formatting to create table of Roll of the Dice values
         Console.WriteLine(vbTab & vbTab & vbTab & vbTab & ("Roll of The Dice"))
-        RandomDiceValueWrite()
-        Console.Write($"{numbers(2)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(3)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(4)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(5)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(6)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(7)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(8)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(9)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(10)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(11)}|".PadLeft(4) & vbTab)
-        Console.Write($"{numbers(12)}|".PadLeft(4) & vbTab)
-
-        Console.ReadLine()
+        Console.Write(StrDup(84, "-") & vbNewLine)
+        For i = 2 To 12
+            Console.Write(($"{i}|").PadLeft(4) & vbTab)
+        Next
+        Console.WriteLine(vbNewLine & StrDup(84, "-"))
+        For i = 2 To UBound(numbers)
+            Console.Write($"{numbers(i)}|".PadLeft(4) & vbTab)
+        Next
+        Console.Read()
     End Sub
-
+    'Random value of roll of two dice
     Function RandomNumber() As Integer
         Dim value As Integer
         Randomize(DateTime.Now.Millisecond)
-        value = CInt(2 * (5 * Rnd() + 1))
+        value = CInt(2 * (5 * Rnd()) + 1)
         Return value
     End Function
-
-    Sub RandomDiceValueWrite()
-        Console.WriteLine("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" &
-            "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" & vbNewLine)
-        Console.Write(("2|").PadLeft(4) & vbTab)
-        Console.Write(("3|").PadLeft(4) & vbTab)
-        Console.Write(("4|").PadLeft(4) & vbTab)
-        Console.Write(("5|").PadLeft(4) & vbTab)
-        Console.Write(("6|").PadLeft(4) & vbTab)
-        Console.Write(("7|").PadLeft(4) & vbTab)
-        Console.Write(("8|").PadLeft(4) & vbTab)
-        Console.Write(("9|").PadLeft(4) & vbTab)
-        Console.Write(("10|").PadLeft(4) & vbTab)
-        Console.Write(("11|").PadLeft(4) & vbTab)
-        Console.Write(("12|").PadLeft(4) & vbNewLine)
-        Console.WriteLine("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" &
-            "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" & vbNewLine)
-    End Sub
-
-
 End Module
