@@ -57,8 +57,8 @@ Module RollOfTheDice
     'Random value of roll of two dice
     Function RandomNumber() As Integer
         Dim value As Integer
-        Randomize(DateTime.Now.Millisecond)
-        value = CInt(2 * (5 * Rnd()) + 1)
+        Randomize()
+        value = (CInt((5 * Rnd()) + 1) + CInt((5 * Rnd()) + 1))
         Return value
     End Function
 End Module
