@@ -14,7 +14,7 @@ Module RollOfTheDice
         'Generates the sum of two dice rolled values. Min of 2, Max of 12.
         'Accumulates the amount of times each value is rolled from 1000 rolls.
         For i = 1 To 1000
-            rollsResult = RandomNumber()
+            rollsResult = RandomNumber(6) + RandomNumber(6)
             Select Case rollsResult
                 Case 2
                     numbers(2) += diceValue
@@ -43,7 +43,7 @@ Module RollOfTheDice
             End Select
         Next
         'Rows Formatting to create table of Roll of the Dice values
-        Console.WriteLine(vbTab & vbTab & vbTab & vbTab & ("Roll of The Dice"))
+        Console.WriteLine(Space(35) & ("Roll of The Dice"))
         Console.Write(StrDup(84, "-") & vbNewLine)
         For i = 2 To 12
             Console.Write(($"{i}|").PadLeft(4) & vbTab)
@@ -52,13 +52,11 @@ Module RollOfTheDice
         For i = 2 To UBound(numbers)
             Console.Write($"{numbers(i)}|".PadLeft(4) & vbTab)
         Next
-        Console.Read()
+        Console.ReadLine()
     End Sub
-    'Random value of roll of two dice
-    Function RandomNumber() As Integer
-        Dim value As Integer
-        Randomize()
-        value = (CInt((5 * Rnd()) + 1) + CInt((5 * Rnd()) + 1))
-        Return value
+    'Random value of a rolled dice
+    Function RandomNumber(maxNumber As Integer) As Integer
+        Randomize(DateTime.Now.Millisecond)
+        Return CInt(Math.Ceiling(Rnd() * maxNumber))
     End Function
 End Module
